@@ -14,7 +14,7 @@ data = data[1:] #removing the first line
 data = [a[:-1] for a in data] #removing the year
 graph = {}
 
-def getcostars(g,node): # direct connections of the given actor
+def getcostars(g,node): # direct connections of the given actor, adjacency list
     lst = []
     if node:
         for x in g[node]:
@@ -67,7 +67,7 @@ def bfs_shortest_path(graph,source,destination):
             if costar not in visited:
                 queue.append((costar, path + [actor, movie]))  # if no paths exists then this is a void function
 
-def pathtoedges(table):
+def pathtoedges(table): #odd to get movie names 
     edges = []
     if table:
         for movie in range(1,len(table)-1,2):
@@ -75,7 +75,7 @@ def pathtoedges(table):
             edges.append((table[movie+1],table[movie]))
     return edges
 
-def pathtonodes(table):
+def pathtonodes(table): #even to get actors
     nodes = []
     if table:
         for actor in range(0,len(table),2):
@@ -84,7 +84,7 @@ def pathtonodes(table):
 
 canvas = None
 
-def close_window():
+def close_window(): # closes code
     root.destroy()
 
 def display_graph():
@@ -97,12 +97,12 @@ def display_graph():
     Actor2 = node2_entry.get().strip()
 
     if len(Actor1)==0:
-        output_label.config(text="Please enter a valid name for Actor 1")
+        output_label.config(text="Please enter a name for Actor 1")
         if canvas:
             canvas.get_tk_widget().grid_forget()
         return
     if len(Actor2)==0:
-        output_label.config(text="Please enter a valid name for Actor 2")
+        output_label.config(text="Please enter a name for Actor 2")
         if canvas:
             canvas.get_tk_widget().grid_forget()
         return
